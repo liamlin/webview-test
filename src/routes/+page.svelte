@@ -1,4 +1,6 @@
 <script>
+  import { onMount } from 'svelte'
+
   let messages = [
     { from: 'RN', text: 'Hi' },
     { from: 'WEB', text: 'svelte-preprocesssvelte-preprocesssvelte-preprocesssvelte-preprocesssvelte-p' },
@@ -26,15 +28,17 @@
       showErrorMessage('RN WebView Not Available!')
     }
   }
-  window.addEventListener('rn-message', (payload) => {
-    const { type, message } = payload
-    if (type === 'ack') {
-      messages.push({ from: 'WEB', text: myMessage })
-      myMessage = ''
-      sending = false
-    } else if (message) {
-      messages.push({ from: 'RN', text: message })
-    }
+  onMount(() => {
+    window.addEventListener('rn-message', (payload) => {
+      const { type, message } = payload
+      if (type === 'ack') {
+        messages.push({ from: 'WEB', text: myMessage })
+        myMessage = ''
+        sending = false
+      } else if (message) {
+        messages.push({ from: 'RN', text: message })
+      }
+    })
   })
 </script>
 
