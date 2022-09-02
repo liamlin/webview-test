@@ -29,15 +29,16 @@
     }
   }
   onMount(() => {
-    window.addEventListener('rn-message', (payload) => {
-      const { type, message } = payload
-      if (type === 'ack') {
+    window.addEventListener('message', (payload) => {
+      const { data } = payload
+      if (data === 'ack') {
         messages.push({ from: 'WEB', text: myMessage })
         myMessage = ''
         sending = false
-      } else if (message) {
-        messages.push({ from: 'RN', text: message })
+      } else if (data) {
+        messages.push({ from: 'RN', text: data })
       }
+      messages = messages
     })
   })
 </script>
