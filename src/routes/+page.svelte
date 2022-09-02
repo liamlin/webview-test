@@ -1,10 +1,7 @@
 <script>
   import { onMount } from 'svelte'
 
-  let messages = [
-    { from: 'RN', text: 'Hi' },
-    { from: 'WEB', text: 'svelte-preprocesssvelte-preprocesssvelte-preprocesssvelte-preprocesssvelte-p' },
-  ]
+  let messages = []
   let myMessage = ''
   let sending = false
   let errorMsg = ''
