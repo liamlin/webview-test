@@ -1,6 +1,8 @@
 <script>
   import { onMount } from 'svelte'
 
+  const MESSAGE_PREFIX = 'rn-message:'
+
   let messages = []
   let myMessage = ''
   let sending = false
@@ -32,8 +34,8 @@
         messages.push({ from: 'WEB', text: myMessage })
         myMessage = ''
         sending = false
-      } else if (data) {
-        messages.push({ from: 'RN', text: data })
+      } else if (data.startsWith(MESSAGE_PREFIX)) {
+        messages.push({ from: 'RN', text: data.replace(MESSAGE_PREFIX, '') })
       }
       messages = messages
     })
